@@ -77,27 +77,37 @@ person1.greet();
 console.log(person1);
 // inheritance
 // parent class for person can be mammal for example
+// Define the Animal class that extends the Mammal class
+// Assume Mammal is defined like this (for demonstration purposes):
 var Mammal = /** @class */ (function () {
-    function Mammal(hasHairArg, isWarmBloodedArg) {
-        this.hasHair = hasHairArg;
-        this.isWarmBlooded = isWarmBloodedArg;
+    // Constructor to initialize Mammal properties
+    function Mammal(hashair, isWarmBlooded) {
+        this.hashair = hashair;
+        this.isWarmBlooded = isWarmBlooded;
     }
-    Mammal.prototype.eat = function () {
-        console.log("mammal is eating");
-    };
     return Mammal;
 }());
+// Animal class that extends Mammal and implements IAnimal
 var Animal = /** @class */ (function (_super) {
     __extends(Animal, _super);
-    function Animal(nameArg, ageArg, hasHairArg, isWarmBlodedArg) {
-        // we can use super keyword to cal the parent classes constructor
-        var _this = _super.call(this, hasHairArg, isWarmBlodedArg) || this;
+    // Constructor to initialize Animal properties and call Mammal's constructor
+    function Animal(nameArg, ageArg, hasHairArg, isWarmBloodedArg) {
+        var _this = _super.call(this, hasHairArg, isWarmBloodedArg) || this; // Call the parent class constructor
         _this.name = nameArg;
         _this.age = ageArg;
         return _this;
     }
+    // Implement the eat method
+    Animal.prototype.eat = function () {
+        console.log("".concat(this.name, " is eating."));
+    };
     return Animal;
 }(Mammal));
+// Create an instance of the Animal class
 var cat = new Animal("Cat", 2, true, true);
 console.log(cat);
 cat.eat();
+// Create another instance using the IAnimal interface type
+var dog = new Animal("Dog", 3, true, true);
+console.log(dog);
+dog.eat();

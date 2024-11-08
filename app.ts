@@ -80,34 +80,56 @@ console.log(person1);
 
 // inheritance
 // parent class for person can be mammal for example
+
+// Define the Animal class that extends the Mammal class
+// Assume Mammal is defined like this (for demonstration purposes):
 class Mammal {
-    // properties
-    hasHair: boolean;
-    isWarmBlooded: boolean;
+    // Properties with public accessibility
+    public hashair: boolean;
+    public isWarmBlooded: boolean;
 
-    constructor(hasHairArg: boolean, isWarmBloodedArg: boolean) {
-        this.hasHair = hasHairArg;
-        this.isWarmBlooded = isWarmBloodedArg;
-    }
-
-    eat(): void {
-        console.log("mammal is eating");
+    // Constructor to initialize Mammal properties
+    constructor(hashair: boolean, isWarmBlooded: boolean) {
+        this.hashair = hashair;
+        this.isWarmBlooded = isWarmBlooded;
     }
 }
 
-class Animal extends Mammal {
+// Define the IAnimal interface
+interface IAnimal {
     name: string;
     age: number;
+    hashair: boolean;
+    isWarmBlooded: boolean;
+    eat(): void;
+}
 
-    constructor(nameArg: string, ageArg: number, hasHairArg: boolean, isWarmBlodedArg: boolean) {
-        // we can use super keyword to cal the parent classes constructor
-        super(hasHairArg, isWarmBlodedArg);
+// Animal class that extends Mammal and implements IAnimal
+class Animal extends Mammal implements IAnimal {
+    public name: string;
+    public age: number;
+
+    // Constructor to initialize Animal properties and call Mammal's constructor
+    constructor(nameArg: string, ageArg: number, hasHairArg: boolean, isWarmBloodedArg: boolean) {
+        super(hasHairArg, isWarmBloodedArg); // Call the parent class constructor
         this.name = nameArg;
         this.age = ageArg;
     }
+
+    // Implement the eat method
+    public eat(): void {
+        console.log(`${this.name} is eating.`);
+    }
 }
 
-// we creat an instance of the animal class and call the eat method
+// Create an instance of the Animal class
 let cat = new Animal("Cat", 2, true, true);
 console.log(cat);
 cat.eat();
+
+// Create another instance using the IAnimal interface type
+let dog: IAnimal = new Animal("Dog", 3, true, true);
+console.log(dog);
+dog.eat();
+
+// youtube videos on typescript getter and setter methods
