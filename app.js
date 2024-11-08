@@ -1,5 +1,20 @@
 // what is a SPA?
 // A web app with one HTML page, that than gets updated dynamically without refreshing the page
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 // What is typescript?
 // Typescript is a superset of javascript,
 // Typescript is transpiled to javascript.
@@ -23,7 +38,7 @@ console.log(z);
 // use LET over VAR when possible as it is best practice to do so
 // we define data type useing a colon
 // number, string, boolean, void, null, undefined
-var customMessage = "Hello, world!";
+var customMessage = "123";
 var num = 123;
 var isValid = true;
 var nullValue = null;
@@ -51,7 +66,38 @@ var Person = /** @class */ (function () {
             this.age = ageArg,
             this.isStudent = isStudentArg;
     }
+    Person.prototype.greet = function () {
+        console.log("hello, there my name is ".concat(this.name));
+    };
     return Person;
 }());
+// instantating a class = creating a object instance
 var person1 = new Person('John', 20, true);
+person1.greet();
 console.log(person1);
+// inheritance
+// parent class for person can be mammal for example
+var Mammal = /** @class */ (function () {
+    function Mammal(hasHairArg, isWarmBloodedArg) {
+        this.hasHair = hasHairArg;
+        this.isWarmBlooded = isWarmBloodedArg;
+    }
+    Mammal.prototype.eat = function () {
+        console.log("mammal is eating");
+    };
+    return Mammal;
+}());
+var Animal = /** @class */ (function (_super) {
+    __extends(Animal, _super);
+    function Animal(nameArg, ageArg, hasHairArg, isWarmBlodedArg) {
+        // we can use super keyword to cal the parent classes constructor
+        var _this = _super.call(this, hasHairArg, isWarmBlodedArg) || this;
+        _this.name = nameArg;
+        _this.age = ageArg;
+        return _this;
+    }
+    return Animal;
+}(Mammal));
+var cat = new Animal("Cat", 2, true, true);
+console.log(cat);
+cat.eat();

@@ -29,10 +29,10 @@ console.log(z);
 // we define data type useing a colon
 
 // number, string, boolean, void, null, undefined
-let customMessage: string = "Hello, world!";
+let customMessage: string = "123";
 let num: number = 123;
 let isValid: boolean = true; 
-let nullValue: null = null;
+let nullValue: null = null;  
 let undefinedValue: undefined = undefined;
 function greet(): void {
     // doesnt return anything, void return type
@@ -66,8 +66,48 @@ class Person {
         this.age = ageArg,
         this.isStudent = isStudentArg;
     }
+
+    greet(): void {
+        console.log(`hello, there my name is ${this.name}`)
+    }
 }
 
-let person1 = new Person('John', 20, true);
 
+// instantating a class = creating a object instance
+let person1 = new Person('John', 20, true);
+person1.greet()
 console.log(person1);
+
+// inheritance
+// parent class for person can be mammal for example
+class Mammal {
+    // properties
+    hasHair: boolean;
+    isWarmBlooded: boolean;
+
+    constructor(hasHairArg: boolean, isWarmBloodedArg: boolean) {
+        this.hasHair = hasHairArg;
+        this.isWarmBlooded = isWarmBloodedArg;
+    }
+
+    eat(): void {
+        console.log("mammal is eating");
+    }
+}
+
+class Animal extends Mammal {
+    name: string;
+    age: number;
+
+    constructor(nameArg: string, ageArg: number, hasHairArg: boolean, isWarmBlodedArg: boolean) {
+        // we can use super keyword to cal the parent classes constructor
+        super(hasHairArg, isWarmBlodedArg);
+        this.name = nameArg;
+        this.age = ageArg;
+    }
+}
+
+// we creat an instance of the animal class and call the eat method
+let cat = new Animal("Cat", 2, true, true);
+console.log(cat);
+cat.eat();
